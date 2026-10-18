@@ -18,7 +18,7 @@ plugins {
 import io.github.fourlastor.construo.Target
 
 sourceSets.main.resources.srcDirs += [ rootProject.file('assets').path ]
-mainClassName = 'puppy.code.lwjgl3.Lwjgl3Launcher'
+mainClassName = 'puppy.code.lwjgl3.LanzadorLwjgl3'
 application.setMainClass(mainClassName)
 eclipse.project.name = appName + '-lwjgl3'
 java.sourceCompatibility = 11

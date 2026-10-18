@@ -1,33 +1,60 @@
-# BlockBreaker2024
+# Cyber Breaker: Protocolo Firewall
 
-A [libGDX](https://libgdx.com/) project generated with [gdx-liftoff](https://github.com/libgdx/gdx-liftoff).
+Rediseño del juego base **Block Breaker 2024** (LibGDX 1.12.1) para el proyecto de
+Programación Orientada a Objetos. Todo se dibuja con primitivas de LibGDX
+(`ShapeRenderer`, `SpriteBatch` y la `BitmapFont` incluida), por lo que **no requiere
+assets externos**.
 
-This project was generated with a template including simple application launchers and an `ApplicationAdapter` extension that draws libGDX logo.
+> Año 2049. La IA rebelde NÚCLEO-X tomó el control de la red de Valparaíso y levantó cinco
+> sectores de firewall. Eres AEGIS, el último antivirus: controla la plataforma, lanza
+> paquetes de datos, rompe los muros y destruye el núcleo.
 
-## Platforms
+## Requisitos
 
-- `core`: Main module with the application logic shared by all platforms.
-- `lwjgl3`: Primary desktop platform using LWJGL3; was called 'desktop' in older docs.
+- JDK 11 o superior (recomendado JDK 17).
+- Conexión a internet la primera vez (Gradle descarga LibGDX 1.12.1).
 
-## Gradle
+## Cómo ejecutar
 
-This project uses [Gradle](https://gradle.org/) to manage dependencies.
-The Gradle wrapper was included, so you can run Gradle tasks using `gradlew.bat` or `./gradlew` commands.
-Useful Gradle tasks and flags:
+**Desde consola** (en la carpeta del proyecto):
 
-- `--continue`: when using this flag, errors will not stop the tasks from running.
-- `--daemon`: thanks to this flag, Gradle daemon will be used to run chosen tasks.
-- `--offline`: when using this flag, cached dependency archives will be used.
-- `--refresh-dependencies`: this flag forces validation of all dependencies. Useful for snapshot versions.
-- `build`: builds sources and archives of every project.
-- `cleanEclipse`: removes Eclipse project data.
-- `cleanIdea`: removes IntelliJ project data.
-- `clean`: removes `build` folders, which store compiled classes and built archives.
-- `eclipse`: generates Eclipse project data.
-- `idea`: generates IntelliJ project data.
-- `lwjgl3:jar`: builds application's runnable jar, which can be found at `lwjgl3/build/libs`.
-- `lwjgl3:run`: starts the application.
-- `test`: runs unit tests (if any).
+```bash
+# Windows
+gradlew.bat lwjgl3:run
+# Linux / macOS
+./gradlew lwjgl3:run
+```
 
-Note that most tasks that are not specific to a single project can be run with `name:` prefix, where the `name` should be replaced with the ID of a specific project.
-For example, `core:clean` removes `build` folder only from the `core` project.
+**NetBeans:** File → Open Project → seleccionar la carpeta `BlockBreaker2024` (proyecto
+Gradle) → clic derecho sobre el subproyecto `lwjgl3` → Run.
+
+**Eclipse:** File → Import → Gradle → Existing Gradle Project → seleccionar la carpeta →
+ejecutar `lwjgl3/src/main/java/puppy/code/lwjgl3/LanzadorLwjgl3.java` como Java Application.
+Si los acentos se ven mal, configurar la codificación del proyecto en UTF-8.
+
+## Controles
+
+| Tecla | Acción |
+|---|---|
+| ← / → o A / D | Mover la plataforma |
+| ESPACIO | Lanzar la bola |
+| P o ESC | Pausar / continuar |
+| Q (en pausa) | Volver al menú |
+| H (en el menú) | Manual del jugador |
+| ENTER | Comenzar / jugar de nuevo |
+
+## Estructura del código (`core/src/main/java/puppy/code`)
+
+| Paquete | Contenido |
+|---|---|
+| `puppy.code` | `JuegoBlockBreaker` (extiende `Game`), `ConfiguracionJuego` |
+| `gestores` | `GestorJuego` — **Singleton** (GM-6) |
+| `entidades` | `ObjetoJuego` (abstracta), `Colisionable` (interfaz), `Plataforma`, `Bola` (Context de Strategy) |
+| `estrategia` | `EstrategiaMovimientoBola` + 4 estrategias concretas — **Strategy** (GM-7) |
+| `bloques` | `Bloque` (método plantilla `alGolpear`) + 5 bloques — **Template Method** (GM-8) |
+| `potenciadores` | `Potenciador` (abstracta) + 6 potenciadores |
+| `niveles` | `Nivel`, `ConstructorNivel`, `ConstructorNivelEstandar`, `ConstructorNivelArena`, `DirectorNivel` — **Builder** (GM-9) |
+| `mundo` | `MundoJuego`, `EntornoJuego`, `Particula`, `TextoFlotante` |
+| `pantallas` | `PantallaBase` (abstracta), `PantallaMenu`, `PantallaAyuda`, `PantallaJuego`, `PantallaFinJuego` |
+
+Los comentarios `[GM-x]` dentro del código indican dónde se aplica cada requerimiento.
