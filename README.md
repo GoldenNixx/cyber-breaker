@@ -11,7 +11,8 @@ assets externos**.
 
 ## Requisitos
 
-- JDK 11 o superior (recomendado JDK 17).
+- JDK 8 o JDK 11 (el código compila con nivel Java 8, por lo que funciona en ambos).
+- Gradle 6.9.4 (lo descarga solo el wrapper `gradlew`; compatible con NetBeans 12).
 - Conexión a internet la primera vez (Gradle descarga LibGDX 1.12.1).
 
 ## Cómo ejecutar
@@ -26,7 +27,8 @@ gradlew.bat lwjgl3:run
 ```
 
 **NetBeans:** File → Open Project → seleccionar la carpeta `BlockBreaker2024` (proyecto
-Gradle) → clic derecho sobre el subproyecto `lwjgl3` → Run.
+Gradle) → clic derecho sobre `LanzadorLwjgl3.java` (subproyecto `lwjgl3`) → Run File.
+Si NetBeans no carga el proyecto, ejecutar por consola con `gradlew.bat lwjgl3:run`.
 
 **Eclipse:** File → Import → Gradle → Existing Gradle Project → seleccionar la carpeta →
 ejecutar `lwjgl3/src/main/java/puppy/code/lwjgl3/LanzadorLwjgl3.java` como Java Application.
